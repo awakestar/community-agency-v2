@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community Members</title>
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: sans-serif;
+      padding: 2rem;
+      text-align: center;
+    }
+    .user-card {
+      background: #111;
+      border: 1px solid #333;
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 300px;
+      border-radius: 8px;
+    }
+    .user-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Community Members</h1>
+  <div id="profiles"></div>
+
+  <script>
+    fetch('https://firestore.googleapis.com/v1/projects/community-agency/databases/(default)/documents/users')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('profiles');
+        (data.documents || []).forEach(doc => {
+          const fields = doc.fields || {};
+          const bio = fields.bio?.stringValue || 'No bio';
+          const avatar = fields.avatar?.stringValue || 'https://placehold.co/100x100?text=No+Avatar';
+
+          const card = document.createElement('div');
+          card.className = 'user-card';
+          card.innerHTML = `
+            <img src="${avatar}" alt="Avatar" />
+            <p><strong>Bio:</strong> ${bio}</p>
+          `;
+          container.appendChild(card);
+        });
+      })
+      .catch(err => {
+        document.getElementById('profiles').innerText = 'Error loading profiles: ' + err.message;
+      });
+  </script>
+</body>
+</html>
