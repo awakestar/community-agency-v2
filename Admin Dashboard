@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en">
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +26,9 @@
       <tr><th>Email</th><th>Bio</th><th>Avatar</th><th>Actions</th></tr>
     </thead>
     <tbody id="userList"></tbody>
-  </table>  <script>
+  </table>
+
+  <script>
     const firebaseConfig = {
       apiKey: "AIzaSyBB2wG2dVO6J-VtaS8e7Pno_6sJ0WCYg1o",
       authDomain: "community-agency.firebaseapp.com",
@@ -60,5 +64,6 @@
         db.collection('users').doc(uid).delete().then(() => location.reload());
       }
     }
-  </script></body>
+  </script>
+</body>
 </html>
