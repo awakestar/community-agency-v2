@@ -1,30 +1,27 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login - Community Agency</title>
+  <title>Login | Community Agency</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 </head>
 <body class="dark">
   <div class="login-container">
-    <img src="assets/logo-white.png" alt="Logo" class="logo" />
-    <h1>Welcome Back</h1>
-    <input id="email" type="email" placeholder="Email" required />
-    <input id="password" type="password" placeholder="Password" required />
+    <img src="logo.png" alt="Logo" class="logo">
+    <h2>Login</h2>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
     <label><input type="checkbox" id="rememberMe"> Remember me</label>
-    <label><input type="checkbox" onclick="togglePassword()"> Show Password</label>
+    <label><input type="checkbox" onclick="togglePassword()"> Show password</label>
     <button onclick="login()">Login</button>
     <button onclick="register()">Register</button>
     <a href="#" onclick="resetPassword()">Forgot Password?</a>
     <p id="message"></p>
+    <br>
     <a href="contact.html">Need Help?</a>
-  </div>
-
-  <script>
+  </div>  <script>
     const firebaseConfig = {
       apiKey: "AIzaSyBB2wG2dVO6J-VtaS8e7Pno_6sJ0WCYg1o",
       authDomain: "community-agency.firebaseapp.com",
@@ -33,6 +30,7 @@
       messagingSenderId: "73696178363",
       appId: "1:73696178363:web:0d2dd702310202aa03399e"
     };
+
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
@@ -46,27 +44,32 @@
       const password = document.getElementById('password').value;
       const remember = document.getElementById('rememberMe').checked;
       const persistence = remember ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION;
+
       auth.setPersistence(persistence)
         .then(() => auth.signInWithEmailAndPassword(email, password))
-        .then(() => window.location.href = "landing.html")
+        .then(() => {
+          window.location.href = 'landing.html';
+        })
         .catch(err => document.getElementById('message').innerText = err.message);
     }
 
     function register() {
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
+
       auth.createUserWithEmailAndPassword(email, password)
-        .then(() => document.getElementById('message').innerText = 'Registered! Please login.')
+        .then(() => {
+          document.getElementById('message').innerText = 'Registered successfully!';
+        })
         .catch(err => document.getElementById('message').innerText = err.message);
     }
 
     function resetPassword() {
       const email = document.getElementById('email').value.trim();
-      if (!email.includes('@')) return document.getElementById('message').innerText = 'Enter your email to reset password.';
+      if (!email.includes('@')) return document.getElementById('message').innerText = 'Please enter your email.';
       auth.sendPasswordResetEmail(email)
         .then(() => document.getElementById('message').innerText = 'Reset email sent!')
         .catch(err => document.getElementById('message').innerText = err.message);
     }
-  </script>
-</body>
+  </script></body>
 </html>
