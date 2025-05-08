@@ -5,55 +5,18 @@ body.dark {
   margin: 0;
   padding: 0;
 }
-
-.login-container, .page-wrapper {
-  max-width: 400px;
-  margin: 80px auto;
-  padding: 2rem;
-  background: #1a1a1a;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.8);
+nav {
+  background: #111;
+  padding: 1rem;
   text-align: center;
 }
-
-input, button {
-  display: block;
-  width: 100%;
-  margin: 0.5rem 0;
-  padding: 10px;
-  border-radius: 6px;
-  border: none;
-  font-size: 1rem;
-}
-
-input {
-  background: #333;
-  color: #fff;
-}
-
-button {
-  background: #4CAF50;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #45a049;
-}
-
-.logo {
-  width: 120px;
-  margin-bottom: 1rem;
-}
-
-a {
+nav a {
   color: #00bcd4;
+  margin: 0 15px;
   text-decoration: none;
-  display: inline-block;
-  margin-top: 10px;
 }
-
-a:hover {
-  text-decoration: underline;
+main {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
 }
