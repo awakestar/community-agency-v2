@@ -2,65 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Forum</title>
   <link rel="stylesheet" href="styles.css" />
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 </head>
-<body class="dark">
-  <nav>
-    <a href="landing.html">Home</a>
-    <a href="forum.html">Forum</a>
-    <a href="events.html">Events</a>
-    <a href="profile.html">My Profile</a>
-    <a href="about.html">About</a>
-  </nav>
+<body>
+  <div id="navbar"></div>
   <main>
-    <h2>Forum</h2>
-    <textarea id="postContent" placeholder="Share something..."></textarea>
-    <button onclick="submitPost()">Post</button>
-    <div id="posts"></div>
+    <h1>Forum</h1>
+    <p>Welcome to Forum page.</p>
   </main>
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyBB2wG2dVO6J-VtaS8e7Pno_6sJ0WCYg1o",
-      authDomain: "community-agency.firebaseapp.com",
-      projectId: "community-agency",
-    };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-    let uid = null;
-
-    auth.onAuthStateChanged(user => {
-      if (!user) return window.location.href = "login.html";
-      uid = user.uid;
-      loadPosts();
-    });
-
-    function submitPost() {
-      const content = document.getElementById('postContent').value;
-      db.collection("posts").add({
-        uid,
-        content,
-        created: new Date()
-      }).then(() => location.reload());
-    }
-
-    function loadPosts() {
-      db.collection("posts").orderBy("created", "desc").limit(20).get()
-        .then(snapshot => {
-          const container = document.getElementById("posts");
-          snapshot.forEach(doc => {
-            const post = doc.data();
-            const div = document.createElement("div");
-            div.textContent = post.content;
-            container.appendChild(div);
-          });
-        });
-    }
-  </script>
+  <script src="navbar-loader.js"></script>
 </body>
 </html>
