@@ -1,4 +1,4 @@
-name: Deploy to Firebase Hosting
+name: Deploy to Firebase Hosting (Service Account)
 
 on:
   push:
@@ -21,7 +21,10 @@ jobs:
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
-      - name: Deploy to Firebase Hosting
+      - name: Deploy to Firebase Hosting with Service Account
+        run: |
+          echo "$GOOGLE_APPLICATION_CREDENTIALS_JSON" > $HOME/firebase-key.json
+          export GOOGLE_APPLICATION_CREDENTIALS="$HOME/firebase-key.json"
+          firebase deploy --only hosting --project community-agency
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        run: firebase deploy --only hosting --project community-agency
+          GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
