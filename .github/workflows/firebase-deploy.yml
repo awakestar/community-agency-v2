@@ -21,7 +21,7 @@ jobs:
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
-      - name: Deploy to Firebase Hosting with Service Account
+      - name: Authenticate and Deploy to Firebase
         run: |
           echo "$GOOGLE_APPLICATION_CREDENTIALS_JSON" > $HOME/firebase-key.json
           export GOOGLE_APPLICATION_CREDENTIALS="$HOME/firebase-key.json"
