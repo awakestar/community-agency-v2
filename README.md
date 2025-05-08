@@ -1,5 +1,5 @@
 Community REST Site
-
+E
 A simple HTML site that uses Firebase Authentication and Firestore REST API.
 
 ## Features
