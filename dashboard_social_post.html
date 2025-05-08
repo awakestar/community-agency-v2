@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html><head><title>Cross-Post Composer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+body {background:#000;color:#fff;font-family:'Bebas Neue',sans-serif;padding:2rem;}
+nav a {display:inline-block;margin:0.5rem;padding:0.5rem 1rem;background:#3c523a;color:#fff;text-decoration:none;border-radius:6px;}
+form {max-width:600px;margin:2rem auto;background:#111;border-left:4px solid #3c523a;padding:1rem;border-radius:10px;}
+input,textarea,button,label {display:block;width:100%;margin:0.5rem 0;padding:0.8rem;border:none;border-radius:6px;}
+input,textarea {background:#222;color:#fff;}
+button {background:#3c523a;color:#fff;font-weight:bold;cursor:pointer;}
+.toggle {display:flex;gap:1rem;align-items:center;margin-top:1rem;}
+</style></head><body>
+<h1 style="text-align:center;color:#3c523a;">Create Social Post</h1>
+<form onsubmit="submitPost(event)">
+  <input type="text" id="title" placeholder="Post Title" required />
+  <textarea id="caption" placeholder="Write your post caption..." maxlength="280"></textarea>
+  <input type="url" id="imageUrl" placeholder="Image or video URL" required />
+  <div class="toggle">
+    <label><input type="checkbox" id="postInsta"> Post to Instagram</label>
+    <label><input type="checkbox" id="postTikTok"> Post to TikTok</label>
+  </div>
+  <button type="submit">Publish Post</button>
+</form>
+<div id="result"></div>
+<script>
+function submitPost(e) {
+  e.preventDefault();
+  const title = document.getElementById('title').value;
+  const caption = document.getElementById('caption').value;
+  const image = document.getElementById('imageUrl').value;
+  const insta = document.getElementById('postInsta').checked;
+  const tiktok = document.getElementById('postTikTok').checked;
+  const result = document.getElementById('result');
+  let preview = `<h3>Preview</h3><p>${title}</p><p>${caption}</p><img src="${image}" style="max-width:100%;border-radius:8px;">`;
+  if (insta) preview += `<p>✔ Will post to Instagram</p>`;
+  if (tiktok) preview += `<p>✔ Will send to TikTok inbox</p>`;
+  result.innerHTML = preview;
+}
+</script>
+</body></html>
