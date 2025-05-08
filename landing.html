@@ -1,8 +1,91 @@
-<!DOCTYPE html><html><head><title>Landing</title></head><body>
-<div id="nav-placeholder"></div>
-<script>
-  fetch("navbar.html")
-    .then(res => res.text())
-    .then(data => document.getElementById("nav-placeholder").innerHTML = data);
-</script>
-<h1>Welcome!</h1></body></html>
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community Agency - Landing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #0f0f0f, #0d1b2a);
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+    header {
+      width: 100%;
+      padding: 2rem 0;
+      display: flex;
+      justify-content: center;
+    }
+    header img {
+      height: 100px;
+      animation: fadeIn 2s ease-in-out;
+    }
+    nav {
+      margin: 1rem 0;
+    }
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: #8ecae6;
+      font-weight: bold;
+    }
+    .section {
+      width: 90%;
+      max-width: 1000px;
+      background: #1a1a1a;
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 1rem 0;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+    h2 {
+      border-bottom: 2px solid #8ecae6;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .btn {
+      display: inline-block;
+      background: #00b4d8;
+      color: black;
+      padding: 10px 20px;
+      margin: 1rem;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #0077b6;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Community Agency Logo">
+  </header>
+  <nav>
+    <a href="login.html">Login</a>
+    <a href="forum.html">Forum</a>
+    <a href="events.html">Events</a>
+    <a href="profile.html">Profile</a>
+  </nav>  <div class="section">
+    <h2>New & Trending</h2>
+    <p>Discover the latest discussions, tutorials, and hot takes from your community.</p>
+  </div>  <div class="section">
+    <h2>Upcoming Events</h2>
+    <p>Never miss a stream, event, or creator meetup. Stay in the loop!</p>
+  </div>
+</body>
+</html>
