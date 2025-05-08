@@ -1,13 +1,105 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>Login - Community Agency</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+    input, button {
+      margin: 0.5rem;
+      padding: 0.75rem;
+      width: 280px;
+      border: none;
+      border-radius: 5px;
+    }
+    input {
+      background: #222;
+      color: #0f0;
+    }
+    button {
+      background: #0f0;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    label {
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
-<body style="background:#000; color:#0f0; text-align:center; padding:2rem;">
-  <h1>Welcome to Community Agency</h1>
-  <p>This is the login page.</p>
+<body>
+  <h1>Login</h1>
+  <input id="email" type="email" placeholder="Email" />
+  <input id="password" type="password" placeholder="Password" />
+  <br />
+  <label><input type="checkbox" id="rememberMe" /> Remember Me</label><br />
+  <label><input type="checkbox" onclick="togglePassword()"> Show Password</label><br />
+  <button onclick="login()">Login</button>
+  <button onclick="register()">Register</button>
+  <button onclick="resetPassword()">Forgot Password</button>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      createUserWithEmailAndPassword,
+      setPersistence,
+      browserLocalPersistence,
+      browserSessionPersistence,
+      sendPasswordResetEmail
+    } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBB2wG2dVO6J-VtaS8e7Pno_6sJ0WCYg1o",
+      authDomain: "community-agency.firebaseapp.com",
+      projectId: "community-agency",
+      storageBucket: "community-agency.appspot.com",
+      messagingSenderId: "73696178363",
+      appId: "1:73696178363:web:0d2dd702310202aa03399e"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.login = async () => {
+      const email = document.getElementById('email').value;
+      const pw = document.getElementById('password').value;
+      const remember = document.getElementById('rememberMe').checked;
+      await setPersistence(auth, remember ? browserLocalPersistence : browserSessionPersistence);
+      signInWithEmailAndPassword(auth, email, pw)
+        .then(() => window.location.href = "landing.html")
+        .catch(e => alert(e.message));
+    };
+
+    window.register = () => {
+      const email = document.getElementById('email').value;
+      const pw = document.getElementById('password').value;
+      createUserWithEmailAndPassword(auth, email, pw)
+        .then(() => alert("Registration successful"))
+        .catch(e => alert(e.message));
+    };
+
+    window.resetPassword = () => {
+      const email = document.getElementById('email').value;
+      sendPasswordResetEmail(auth, email)
+        .then(() => alert("Reset email sent"))
+        .catch(e => alert(e.message));
+    };
+
+    window.togglePassword = () => {
+      const pw = document.getElementById('password');
+      pw.type = pw.type === "password" ? "text" : "password";
+    };
+  </script>
 </body>
 </html>
