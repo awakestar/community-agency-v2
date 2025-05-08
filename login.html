@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en">
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,7 +22,9 @@
     <a href="#" onclick="resetPassword()">Forgot Password?</a>
     <p id="message"></p>
     <a href="contact.html">Need Help?</a>
-  </div>  <script>
+  </div>
+
+  <script>
     const firebaseConfig = {
       apiKey: "AIzaSyBB2wG2dVO6J-VtaS8e7Pno_6sJ0WCYg1o",
       authDomain: "community-agency.firebaseapp.com",
@@ -63,5 +67,6 @@
         .then(() => document.getElementById('message').innerText = 'Reset email sent!')
         .catch(err => document.getElementById('message').innerText = err.message);
     }
-  </script></body>
-</html><!-- login.html content goes here -->
+  </script>
+</body>
+</html>
