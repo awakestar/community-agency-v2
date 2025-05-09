@@ -1,59 +1,28 @@
+/* public/css/styles.css */
 
-/* styles.css - Global site design */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #0b0c10;
-  color: #f4f4f4;
-  line-height: 1.6;
-  padding: 1rem;
-}
+body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0d0d0d; color: #fff; }
 
-nav {
-  background: #1f2833;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 1rem;
-  border-bottom: 2px solid #66fcf1;
-}
+header, nav { background-color: #111; padding: 1rem; text-align: center; }
 
-nav a {
-  color: #66fcf1;
-  text-decoration: none;
-  font-weight: bold;
-  margin: 0.5rem;
-}
+nav a { color: #0f0; text-decoration: none; margin: 0 1rem; font-weight: bold; }
 
-nav a:hover {
-  color: #45a29e;
-}
+nav a:hover { text-decoration: underline; }
 
-main {
-  padding: 1rem;
-  max-width: 960px;
-  margin: auto;
-}
+main { padding: 2rem; max-width: 600px; margin: 0 auto; }
 
-input, textarea, button {
-  display: block;
-  width: 100%;
-  max-width: 400px;
-  margin: 1rem auto;
-  padding: 0.75rem;
-  background: #1f2833;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-}
+form { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
 
-button {
-  background: #66fcf1;
-  color: #0b0c10;
-  font-weight: bold;
-  cursor: pointer;
-}
+input[type="email"], input[type="password"], input[type="text"] { width: 100%; max-width: 300px; padding: 0.75rem; border-radius: 0.5rem; border: none; background-color: #222; color: #fff; }
 
-button:hover {
-  background: #45a29e;
-}
+button { padding: 0.75rem 1.5rem; background-color: #0f0; color: #000; font-weight: bold; border: none; border-radius: 0.5rem; cursor: pointer; transition: background-color 0.3s ease; }
+
+button:hover { background-color: #0c0; }
+
+#message { margin-top: 1rem; color: #f00; text-align: center; }
+
+footer { text-align: center; padding: 1rem; font-size: 0.875rem; color: #888; border-top: 1px solid #222; margin-top: 2rem; }
+
+textarea, input[type="url"] { background-color: #222; color: #fff; padding: 0.75rem; border-radius: 0.5rem; width: 100%; max-width: 300px; border: none; resize: vertical; }
+
+label { font-size: 0.9rem; color: #ccc; }
+
