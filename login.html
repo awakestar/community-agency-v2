@@ -15,17 +15,17 @@
     <a href="profile.html">My Profile</a>
     <a href="about.html">About</a>
   </nav>  <main class="auth-container">
-    <h1>Login</h1>
-    <input type="email" id="email" placeholder="Email" required />
-    <input type="password" id="password" placeholder="Password" required />
-    <label><input type="checkbox" id="rememberMe" /> Remember Me</label>
-    <label><input type="checkbox" onclick="togglePassword()" /> Show Password</label>
+    <h1 class="auth-title">Login</h1>
+    <input type="email" id="email" placeholder="Email" class="auth-input" required />
+    <input type="password" id="password" placeholder="Password" class="auth-input" required />
+    <label class="auth-checkbox"><input type="checkbox" id="rememberMe" /> Remember Me</label>
+    <label class="auth-checkbox"><input type="checkbox" onclick="togglePassword()" /> Show Password</label>
     <div class="auth-buttons">
       <button onclick="login()">Login</button>
       <button onclick="register()">Register</button>
       <button onclick="resetPassword()">Forgot Password?</button>
     </div>
-    <p id="message"></p>
+    <p id="message" class="auth-message"></p>
   </main>  <script>
     const firebaseConfig = {
       apiKey: "AIzaSyBB2wG2dVO6J-VtaS8e7Pno_6sJ0WCYg1o",
