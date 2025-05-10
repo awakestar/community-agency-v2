@@ -1,19 +1,80 @@
-/* File: style.css */
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Community Agency</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getAuth, setPersistence, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, browserLocalPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";const firebaseConfig = {
+  apiKey: "AIzaSyBB2wG2dVO6J-VtaS8e7Pno_6sJ0WCYg1o",
+  authDomain: "community-agency.firebaseapp.com",
+  projectId: "community-agency",
+  storageBucket: "community-agency.appspot.com",
+  messagingSenderId: "73696178363",
+  appId: "1:73696178363:web:0d2dd702310202aa03399e"
+};
 
-body.dark-theme { background-color: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 0; }
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-nav.navbar { background-color: #111; padding: 1rem; display: flex; gap: 1.5rem; justify-content: center; }
+window.togglePassword = function () {
+  const pw = document.getElementById('password');
+  pw.type = pw.type === 'password' ? 'text' : 'password';
+};
 
-nav.navbar a { color: #0f0; text-decoration: none; font-weight: bold; }
+window.login = function () {
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const remember = document.getElementById('rememberMe').checked;
+  const persistence = remember ? browserLocalPersistence : browserSessionPersistence;
 
-main.auth-container, main.content-container { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; margin-top: 2rem; }
+  setPersistence(auth, persistence)
+    .then(() => signInWithEmailAndPassword(auth, email, password))
+    .then(() => {
+      document.getElementById('message').innerText = 'Login successful!';
+      window.location.href = "landing.html";
+    })
+    .catch(err => document.getElementById('message').innerText = err.message);
+};
 
-.auth-container input, .auth-container button, .auth-container label { margin: 0.5rem; width: 90%; max-width: 300px; }
+window.register = function () {
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  createUserWithEmailAndPassword(auth, email, password)
+    .then(() => document.getElementById('message').innerText = 'Account created!')
+    .catch(err => document.getElementById('message').innerText = err.message);
+};
 
-.auth-container input { padding: 10px; border-radius: 5px; border: none; background-color: #222; color: #fff; }
+window.resetPassword = function () {
+  const email = document.getElementById('email').value.trim();
+  if (!email.includes('@')) return document.getElementById('message').innerText = 'Enter a valid email.';
+  sendPasswordResetEmail(auth, email)
+    .then(() => document.getElementById('message').innerText = 'Reset email sent!')
+    .catch(err => document.getElementById('message').innerText = err.message);
+};
 
-.auth-buttons { display: flex; flex-direction: column; gap: 0.5rem; }
-
-.auth-buttons button { padding: 10px; border: none; border-radius: 5px; background-color: #0f0; color: #000; font-weight: bold; cursor: pointer; transition: background-color 0.3s; }
-
-.auth-buttons button:hover { background-color: #0c0; }
+  </script>
+</head>
+<body class="dark-theme">
+  <nav class="navbar">
+    <a href="landing.html">Home</a>
+    <a href="forum.html">Forum</a>
+    <a href="events.html">Events</a>
+    <a href="profile.html">My Profile</a>
+    <a href="about.html">About</a>
+  </nav>  <main class="auth-container">
+    <h1 class="auth-title">Login</h1>
+    <input type="email" id="email" placeholder="Email" class="auth-input" required />
+    <input type="password" id="password" placeholder="Password" class="auth-input" required />
+    <label class="auth-checkbox"><input type="checkbox" id="rememberMe" /> Remember Me</label>
+    <label class="auth-checkbox"><input type="checkbox" onclick="togglePassword()" /> Show Password</label>
+    <div class="auth-buttons">
+      <button onclick="login()">Login</button>
+      <button onclick="register()">Register</button>
+      <button onclick="resetPassword()">Forgot Password?</button>
+    </div>
+    <p id="message" class="auth-message"></p>
+  </main>
+</body>
+</html>
